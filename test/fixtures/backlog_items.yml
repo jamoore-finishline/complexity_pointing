@@ -1,0 +1,27 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  title: MyString
+  description: MyText
+  category: MyString
+  air_flow: false
+  performance_testing: false
+  audit_logging: false
+  squad_dependencies: false
+  cross_service_coordination: false
+  integration: false
+  uncertainty_level: 1
+  technical_debt: false
+
+two:
+  title: MyString
+  description: MyText
+  category: MyString
+  air_flow: false
+  performance_testing: false
+  audit_logging: false
+  squad_dependencies: false
+  cross_service_coordination: false
+  integration: false
+  uncertainty_level: 1
+  technical_debt: false
