@@ -19,8 +19,10 @@ Rails.application.routes.draw do
 
   # Admin namespace
   namespace :admin do
-    resources :users, only: [:new, :create]
-    resources :pointing_sessions, only: [:new, :create]
+    get 'dashboard', to: 'dashboard#index', as: :dashboard
+    resources :users  
+    resources :pointing_sessions, only: [:new, :create, :index, :show, :edit, :update, :destroy]
+    resources :backlog_items, only: [:new, :create, :index, :show, :edit, :update, :destroy]
   end
 
   # Root route

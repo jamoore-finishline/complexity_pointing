@@ -1,15 +1,13 @@
 class User < ApplicationRecord
-    # Include default devise modules. Others available are:
-  # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
 
+  belongs_to :role
   has_many :votes
   has_many :comments
-  belongs_to :role
 
   validates :name, presence: true
-  validates :role, presence: true
+  validates :role_id, presence: true
 
   def developer?
     role.name == 'developer'
@@ -23,5 +21,3 @@ class User < ApplicationRecord
     role.name == 'admin'
   end
 end
-
-

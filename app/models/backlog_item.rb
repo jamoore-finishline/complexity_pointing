@@ -1,6 +1,9 @@
 class BacklogItem < ApplicationRecord
     has_many :votes, dependent: :destroy
     has_many :comments, dependent: :destroy
+    belongs_to :pointing_session
+    accepts_nested_attributes_for :votes, allow_destroy: true
+    accepts_nested_attributes_for :comments, allow_destroy: true
   
     validates :title, presence: true
     validates :description, presence: true

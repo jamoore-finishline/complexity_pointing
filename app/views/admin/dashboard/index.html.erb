@@ -1,0 +1,96 @@
+<!-- app/views/admin/dashboard/index.html.erb -->
+<h1>Admin Dashboard</h1>
+<!-- Add more admin-related content here -->
+<div class="container">
+    <div class="row">
+        <div class="col-md-4">
+            <div class="card" style="width: 18rem;">
+            <!--<img class="card-img-top" src="..." alt="Card image cap">-->
+                <div class="card-body">
+                    <h5 class="card-title">Create User</h5>
+                    <p class="card-text">Use the below form to create a user account.</p>
+                    <%= render partial: 'shared/user_form'%>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card" style="width: 18rem;">
+                <div class="card-body">
+                    <h5 class="card-title">Create Pointing Session</h5>
+                    <p class="card-text">Use the below form to create a pointing session.</p>
+                    <%= render partial: 'shared/pointing_session_form', locals: { pointing_session: @pointing_session } %>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card" style="width: 18rem;">
+                <div class="card-body">
+                    <h5 class="card-title">Create Backlog Item</h5>
+                    <p class="card-text">Use the below form to create a backlog item.</p>
+
+                    <%= form_with(model: @backlog_item, url: admin_backlog_items_path, local: true) do |f| %>
+                        <%= render partial: 'shared/backlog_item_fields', f: f %>
+                        
+                        <div class="form-group">
+                        <%= f.label :pointing_session_id, 'Pointing Session' %>
+                        <%= f.collection_select :pointing_session_id, @pointing_sessions, :id, ->(ps) { formatted_date(ps.date) }, prompt: 'Select Pointing Session', class: 'form-control' %>
+                        </div>
+                        
+                        <div class="form-group">
+                        <%= f.submit 'Create Backlog Item', class: 'btn btn-primary' %>
+                        </div>
+                    <% end %>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-6">
+            <h2>All Users</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Name</th> <!-- Corrected here -->
+                    </tr>
+                </thead>
+                <tbody>
+                    <% @users.each do |user| %>
+                        <tr>
+                            <td><%= user.name %></td>
+                        </tr>
+                    <% end %>
+                </tbody>
+            </table>
+        </div>
+        <!-- app/views/admin/dashboard/index.html.erb -->
+        <div class="col-md-6">
+        <h2>All Pointing Sessions</h2>
+        <table class="table">
+            <thead>
+            <tr>
+                <th>Date</th>
+                <th>Backlog Items</th>
+            </tr>
+            </thead>
+            <tbody>
+            <% @pointing_sessions.each do |ps| %>
+                <tr>
+                <td><%= ps.date.strftime("%B %d, %Y") %></td>
+                <td>
+                    <ul>
+                    <% ps.backlog_items.each do |item| %>
+                        <li>
+                        <strong>Title:</strong> <%= item.title %><br>
+                        <strong>Description:</strong> <%= item.description %>
+                        </li>
+                    <% end %>
+                    </ul>
+                </td>
+                </tr>
+            <% end %>
+            </tbody>
+        </table>
+        </div>
+
+    </div>
+</div>
