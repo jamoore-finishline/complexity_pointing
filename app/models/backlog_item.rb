@@ -7,7 +7,7 @@ class BacklogItem < ApplicationRecord
   
     validates :title, presence: true
     validates :description, presence: true
-  
+    attribute :released, :boolean, default: false
     # Calculate average scores for developers and QA analysts
     def average_developer_score
       developer_votes = votes.joins(:user).where(users: { role_id: Role.find_by(name: 'developer').id })

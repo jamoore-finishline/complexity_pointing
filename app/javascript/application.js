@@ -6,3 +6,4 @@ import 'pass_all';
 import 'dismiss_notice';
 import Rails from "@rails/ujs";
 Rails.start();
+import "./channels"

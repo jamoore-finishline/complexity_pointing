@@ -1,0 +1,30 @@
+<!-- app/views/users/dashboard/index.html.erb -->
+<h1>User Dashboard</h1>
+
+<div class="container">
+  <div class="row">
+    <div class="col-md-12">
+      <h2>Backlog Items</h2>
+      <table class="table">
+        <thead>
+          <tr>
+            <th>Title</th>
+            <th>Description</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @backlog_items.where(released: true).each do |backlog_item| %>
+            <tr>
+              <td><%= backlog_item.title %></td>
+              <td><%= backlog_item.description %></td>
+              <td>
+                <%= link_to 'Vote', backlog_item_path(backlog_item), class: 'btn btn-primary' %>
+              </td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
