@@ -1,0 +1,30 @@
+<%= form_with(model: @user, url: admin_users_path, local: true) do |form| %>
+  <%= form.fields_for :user do |user_form| %>
+    <div class="mb-3">
+      <%= user_form.label :name, "Name", class: "form-label" %>
+      <%= user_form.text_field :name, class: "form-control", required: true %>
+    </div>
+
+    <div class="mb-3">
+      <%= user_form.label :email, "Email", class: "form-label" %>
+      <%= user_form.email_field :email, class: "form-control", required: true %>
+    </div>
+
+    <div class="mb-3">
+      <%= user_form.label :password, "Password", class: "form-label" %>
+      <%= user_form.password_field :password, class: "form-control", required: true %>
+    </div>
+
+    <div class="mb-3">
+      <%= user_form.label :password_confirmation, "Confirm Password", class: "form-label" %>
+      <%= user_form.password_field :password_confirmation, class: "form-control", required: true %>
+    </div>
+
+    <div class="mb-3">
+      <%= user_form.label :role_id, "Role", class: "form-label" %>
+      <%= user_form.collection_select :role_id, Role.all, :id, :name, {}, { class: "form-select", required: true } %>
+    </div>
+
+    <%= form.submit "Create User", class: "btn btn-primary" %>
+  <% end %>
+<% end %>

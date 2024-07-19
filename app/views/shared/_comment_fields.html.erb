@@ -1,0 +1,7 @@
+<!-- app/views/shared/_comment_fields.html.erb -->
+<div class="nested-fields">
+  <%= form.label :content, "Comment" %>
+  <%= form.text_area :content, class: "form-control", rows: 3 %>
+
+  <%= link_to 'Remove', '#', class: 'remove-comment' %>
+</div>

@@ -1,0 +1,25 @@
+<!-- app/views/backlog_items/show.html.erb -->
+<h1><%= @backlog_item.title %></h1>
+<p><strong>Description:</strong> <%= @backlog_item.description %></p>
+
+<%= form_with(model: @vote, url: vote_backlog_item_path(@backlog_item), local: true) do |f| %>
+  <div class="form-group">
+    <%= f.label :value, 'Value' %>
+    <%= f.select :value, options_for_select([['0.5', 0.5], ['1', 1], ['2', 2], ['3', 3], ['5', 5], ['8', 8], ['13', 13]], @vote.value), {}, class: 'form-control' %>
+  </div>
+
+  <!-- Add more fields for other vote attributes -->
+  <div class="form-group">
+    <%= f.label :airflow %>
+    <%= f.check_box :airflow %>
+  </div>
+  <div class="form-group">
+    <%= f.label :performance_testing %>
+    <%= f.check_box :performance_testing %>
+  </div>
+  <!-- Repeat for other boolean fields -->
+
+  <div class="form-group">
+    <%= f.submit 'Submit Vote', class: 'btn btn-primary' %>
+  </div>
+<% end %>

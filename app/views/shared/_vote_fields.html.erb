@@ -1,0 +1,93 @@
+<!-- app/views/votes/_form.html.erb -->
+<%= form_with(model: @vote, local: true) do |f| %>
+  <div class="form-group">
+    <%= f.label :pass_all, 'Pass All Floats' %>
+    <%= f.check_box :pass_all, id: 'pass_all', class: 'form-control' %>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :ui_points, 'UI Points' %>
+    <%= f.select :ui_points, options_for_select([['Pass', nil], ['0.5', 0.5], ['1', 1], ['2', 2], ['3', 3], ['5', 5], ['8', 8], ['13', 13]], @vote.ui_points), {}, class: 'form-control' %>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :api_points, 'API Points' %>
+    <%= f.select :api_points, options_for_select([['Pass', nil], ['0.5', 0.5], ['1', 1], ['2', 2], ['3', 3], ['5', 5], ['8', 8], ['13', 13]], @vote.api_points), {}, class: 'form-control' %>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :processor_points, 'Processor Points' %>
+    <%= f.select :processor_points, options_for_select([['Pass', nil], ['0.5', 0.5], ['1', 1], ['2', 2], ['3', 3], ['5', 5], ['8', 8], ['13', 13]], @vote.processor_points), {}, class: 'form-control' %>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :task_scheduler_points, 'Task Scheduler Points' %>
+    <%= f.select :task_scheduler_points, options_for_select([['Pass', nil], ['0.5', 0.5], ['1', 1], ['2', 2], ['3', 3], ['5', 5], ['8', 8], ['13', 13]], @vote.task_scheduler_points), {}, class: 'form-control' %>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :data_points, 'Data Points' %>
+    <%= f.select :data_points, options_for_select([['Pass', nil], ['0.5', 0.5], ['1', 1], ['2', 2], ['3', 3], ['5', 5], ['8', 8], ['13', 13]], @vote.data_points), {}, class: 'form-control' %>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :research_points, 'Research Points' %>
+    <%= f.select :research_points, options_for_select([['Pass', nil], ['0.5', 0.5], ['1', 1], ['2', 2], ['3', 3], ['5', 5], ['8', 8], ['13', 13]], @vote.research_points), {}, class: 'form-control' %>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :external_data_points, 'External Data Points' %>
+    <%= f.select :external_data_points, options_for_select([['Pass', nil], ['0.5', 0.5], ['1', 1], ['2', 2], ['3', 3], ['5', 5], ['8', 8], ['13', 13]], @vote.external_data_points), {}, class: 'form-control' %>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :manual_testing_points, 'Manual Testing Points' %>
+    <%= f.select :manual_testing_points, options_for_select([['Pass', nil], ['0.5', 0.5], ['1', 1], ['2', 2], ['3', 3], ['5', 5], ['8', 8], ['13', 13]], @vote.manual_testing_points), {}, class: 'form-control' %>
+  </div>
+
+  <fieldset class="form-group">
+    <legend>Items for Consideration</legend>
+
+    <div class="form-check">
+      <%= f.check_box :airflow, id: 'airflow', class: 'form-check-input', checked: @vote.airflow %>
+      <%= f.label :airflow, 'Airflow', class: 'form-check-label' %>
+    </div>
+
+    <div class="form-check">
+      <%= f.check_box :performance_testing, id: 'performance_testing', class: 'form-check-input', checked: @vote.performance_testing %>
+      <%= f.label :performance_testing, 'Performance Testing', class: 'form-check-label' %>
+    </div>
+
+    <div class="form-check">
+      <%= f.check_box :audit_logging, id: 'audit_logging', class: 'form-check-input', checked: @vote.audit_logging %>
+      <%= f.label :audit_logging, 'Audit Logging', class: 'form-check-label' %>
+    </div>
+
+    <div class="form-check">
+      <%= f.check_box :squad_dependencies, id: 'squad_dependencies', class: 'form-check-input', checked: @vote.squad_dependencies %>
+      <%= f.label :squad_dependencies, 'Squad Dependencies', class: 'form-check-label' %>
+    </div>
+
+    <div class="form-check">
+      <%= f.check_box :cross_service_coordination, id: 'cross_service_coordination', class: 'form-check-input', checked: @vote.cross_service_coordination %>
+      <%= f.label :cross_service_coordination, 'Cross Service Coordination', class: 'form-check-label' %>
+    </div>
+
+    <div class="form-check">
+      <%= f.check_box :integration, id: 'integration', class: 'form-check-input', checked: @vote.integration %>
+      <%= f.label :integration, 'Integration', class: 'form-check-label' %>
+    </div>
+
+    <div class="form-check">
+      <%= f.check_box :level_of_uncertainty, id: 'level_of_uncertainty', class: 'form-check-input', checked: @vote.level_of_uncertainty %>
+      <%= f.label :level_of_uncertainty, 'Level of Uncertainty', class: 'form-check-label' %>
+    </div>
+
+    <div class="form-check">
+      <%= f.check_box :technical_debt, id: 'technical_debt', class: 'form-check-input', checked: @vote.technical_debt %>
+      <%= f.label :technical_debt, 'Technical Debt', class: 'form-check-label' %>
+    </div>
+  </fieldset>
+
+  <%= f.submit 'Submit', class: 'btn btn-primary' %>
+<% end %>

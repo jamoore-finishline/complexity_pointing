@@ -8,7 +8,7 @@ Rails.application.routes.draw do
   # Pointing sessions routes
   resources :pointing_sessions, except: [:new, :create] do
     # Nested backlog items routes
-    resources :backlog_items do
+    resources :backlog_items, only: [:index, :show] do
       # Nested votes routes
       resources :votes, only: [:create, :update, :destroy]
 
@@ -19,8 +19,19 @@ Rails.application.routes.draw do
 
   # Admin namespace
   namespace :admin do
-    resources :users, only: [:new, :create]
-    resources :pointing_sessions, only: [:new, :create]
+    get 'dashboard', to: 'dashboard#index', as: :dashboard
+    resources :users
+    resources :pointing_sessions, only: [:new, :create, :index, :show, :edit, :update, :destroy]
+    resources :backlog_items, only: [:new, :create, :index, :show, :edit, :update, :destroy] do
+      member do
+        patch :toggle_release
+      end
+    end
+  end
+
+  # User namespace
+  namespace :user do
+    get 'dashboard', to: 'dashboard#index'
   end
 
   # Root route

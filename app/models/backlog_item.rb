@@ -1,10 +1,13 @@
 class BacklogItem < ApplicationRecord
     has_many :votes, dependent: :destroy
     has_many :comments, dependent: :destroy
+    belongs_to :pointing_session
+    accepts_nested_attributes_for :votes, allow_destroy: true
+    accepts_nested_attributes_for :comments, allow_destroy: true
   
     validates :title, presence: true
     validates :description, presence: true
-  
+    attribute :released, :boolean, default: false
     # Calculate average scores for developers and QA analysts
     def average_developer_score
       developer_votes = votes.joins(:user).where(users: { role_id: Role.find_by(name: 'developer').id })

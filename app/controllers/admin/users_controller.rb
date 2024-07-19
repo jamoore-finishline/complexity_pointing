@@ -1,4 +1,3 @@
-# app/controllers/admin/users_controller.rb
 module Admin
   class UsersController < ApplicationController
     before_action :authenticate_user!
@@ -10,13 +9,23 @@ module Admin
 
     def create
       @user = User.new(user_params)
+      
+      # Debugging with binding.pry
+      binding.pry
+      
       if @user.save
-        redirect_to root_path, notice: 'User was successfully created.'
+        redirect_to admin_dashboard_path, notice: 'User was successfully created.'
       else
+        flash.now[:alert] = 'Failed to create user.'
+        # Capture errors and log them for debugging
+        Rails.logger.error "Failed to save user: #{@user.errors}"
+        # Optionally, you can assign errors to a variable to display in the view
+        @error_messages = @user.errors.full_messages
         render :new
       end
     end
-
+    
+    
     private
 
     def user_params
@@ -24,7 +33,7 @@ module Admin
     end
 
     def ensure_admin
-      redirect_to root_path, alert: 'You are not authorized to access this page.' unless current_user.admin?
+      redirect_to root_path, alert: 'You are not authorized to access this page.' unless current_user.role.name == 'Admin'
     end
   end
 end

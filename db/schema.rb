@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2024_07_10_181814) do
+ActiveRecord::Schema[7.0].define(version: 2024_07_19_134213) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -18,16 +18,10 @@ ActiveRecord::Schema[7.0].define(version: 2024_07_10_181814) do
     t.string "title"
     t.text "description"
     t.string "category"
-    t.boolean "air_flow"
-    t.boolean "performance_testing"
-    t.boolean "audit_logging"
-    t.boolean "squad_dependencies"
-    t.boolean "cross_service_coordination"
-    t.boolean "integration"
-    t.integer "uncertainty_level"
-    t.boolean "technical_debt"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.bigint "pointing_session_id"
+    t.boolean "released"
   end
 
   create_table "comments", force: :cascade do |t|
@@ -42,11 +36,9 @@ ActiveRecord::Schema[7.0].define(version: 2024_07_10_181814) do
 
   create_table "pointing_sessions", force: :cascade do |t|
     t.date "date"
-    t.integer "duration"
-    t.integer "product_manager_id"
-    t.integer "scrum_master_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "focus"
   end
 
   create_table "roles", force: :cascade do |t|
@@ -73,17 +65,17 @@ ActiveRecord::Schema[7.0].define(version: 2024_07_10_181814) do
   create_table "votes", force: :cascade do |t|
     t.bigint "user_id", null: false
     t.bigint "backlog_item_id", null: false
-    t.integer "value"
+    t.float "value"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.integer "ui_points"
-    t.integer "api_points"
-    t.integer "processor_points"
-    t.integer "task_scheduler_points"
-    t.integer "data_points"
-    t.integer "research_points"
-    t.integer "external_data_points"
-    t.integer "manual_testing_points"
+    t.float "ui_points"
+    t.float "api_points"
+    t.float "processor_points"
+    t.float "task_scheduler_points"
+    t.float "data_points"
+    t.float "research_points"
+    t.float "external_data_points"
+    t.float "manual_testing_points"
     t.boolean "airflow"
     t.boolean "performance_testing"
     t.boolean "audit_logging"

@@ -1,0 +1,10 @@
+<!-- app/views/shared/_backlog_item_fields_template.html.erb -->
+<template id="backlog_item_template">
+  <div class="nested-fields">
+    <%= form_with(model: PointingSession.new) do |form| %>
+      <%= form.fields_for :backlog_items, PointingSession.new.backlog_items.build, child_index: 'NEW_RECORD' do |backlog_item_form| %>
+        <%= render 'shared/backlog_item_fields', form: backlog_item_form %>
+      <% end %>
+    <% end %>
+  </div>
+</template>

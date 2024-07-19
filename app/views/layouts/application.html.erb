@@ -19,10 +19,15 @@
 
   <body>
     <%= render partial: "shared/navbar" %>
-    <p class="notice"><%= notice %></p>
-    <p class="alert"><%= alert %></p>
+    <% flash.each do |key, value| %>
+      <div class="alert alert-<%= key %> alert-dismissible fade show flash-alert" role="alert">
+        <%= value %>
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+      </div>
+    <% end %>
     <div class="container">
       <%= yield %>
     </div>
+    <%= action_cable_meta_tag %>
   </body>
 </html>
